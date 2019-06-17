@@ -15,6 +15,9 @@
 		B645810622B2E93600541D62 /* Emoji_PuzzlesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B645810522B2E93600541D62 /* Emoji_PuzzlesTests.swift */; };
 		B645811122B2E93600541D62 /* Emoji_PuzzlesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B645811022B2E93600541D62 /* Emoji_PuzzlesUITests.swift */; };
 		B6984AFE22B3E928002B1A5B /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6984AFD22B3E928002B1A5B /* PuzzleViewController.swift */; };
+		B69C7B4F22B7F4E100ADF173 /* PuzzleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69C7B4E22B7F4E100ADF173 /* PuzzleRepository.swift */; };
+		B69C7B5122B7F62800ADF173 /* PuzzleDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69C7B5022B7F62800ADF173 /* PuzzleDataRepository.swift */; };
+		B69C7B5322B8127400ADF173 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69C7B5222B8127400ADF173 /* GameOverViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		B645811022B2E93600541D62 /* Emoji_PuzzlesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji_PuzzlesUITests.swift; sourceTree = "<group>"; };
 		B645811222B2E93600541D62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6984AFD22B3E928002B1A5B /* PuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
+		B69C7B4E22B7F4E100ADF173 /* PuzzleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleRepository.swift; sourceTree = "<group>"; };
+		B69C7B5022B7F62800ADF173 /* PuzzleDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleDataRepository.swift; sourceTree = "<group>"; };
+		B69C7B5222B8127400ADF173 /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 		B64580EF22B2E93500541D62 /* Emoji Puzzles */ = {
 			isa = PBXGroup;
 			children = (
+				B69C7B4D22B7F4BF00ADF173 /* Data */,
 				B6984B0022B40A10002B1A5B /* Models */,
 				B6984AFF22B40A06002B1A5B /* Controllers */,
 				B64580F022B2E93500541D62 /* AppDelegate.swift */,
@@ -132,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				B6984AFD22B3E928002B1A5B /* PuzzleViewController.swift */,
+				B69C7B5222B8127400ADF173 /* GameOverViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -142,6 +150,15 @@
 				B61E756F22B36718003ABAAB /* Puzzle.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B69C7B4D22B7F4BF00ADF173 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B69C7B4E22B7F4E100ADF173 /* PuzzleRepository.swift */,
+				B69C7B5022B7F62800ADF173 /* PuzzleDataRepository.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,8 +293,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B61E757022B36718003ABAAB /* Puzzle.swift in Sources */,
+				B69C7B5122B7F62800ADF173 /* PuzzleDataRepository.swift in Sources */,
+				B69C7B5322B8127400ADF173 /* GameOverViewController.swift in Sources */,
 				B6984AFE22B3E928002B1A5B /* PuzzleViewController.swift in Sources */,
 				B64580F122B2E93500541D62 /* AppDelegate.swift in Sources */,
+				B69C7B4F22B7F4E100ADF173 /* PuzzleRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
