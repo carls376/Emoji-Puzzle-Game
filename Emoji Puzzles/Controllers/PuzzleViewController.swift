@@ -11,7 +11,7 @@ import UIKit
 class PuzzleViewController: UIViewController {
     
     @IBOutlet weak var emojiLabel: UILabel!
-    @IBOutlet weak var answerLabel: UITextField!
+    @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
     var correctAnswers: Int = 0
@@ -39,20 +39,21 @@ class PuzzleViewController: UIViewController {
     }
     
     @IBAction func submitAnswer(_ sender: Any) {
-        if self.answerLabel?.text?.lowercased() == self.currentPuzzle?.answer.lowercased() {
+        if self.answerTextField.text?.lowercased() == self.currentPuzzle?.answer.lowercased() {
             // correct answer
             self.correctAnswers += 1
-            let alertController = UIAlertController(title: "Correct!", message: "\(self.currentPuzzle.answer) is the correct answer", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "Next", style: .default, handler: {(alert: UIAlertAction!) in self.setNextPuzzle()})
-            alertController.addAction(alertAction)
-            self.present(alertController, animated: true)
+            self.presentResult(title: "Correct!")
         } else {
             // incorrect answer
-            let alertController = UIAlertController(title: "Incorrect!", message: "\(self.currentPuzzle.answer) is the correct answer", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "Next", style: .default, handler: {(alert: UIAlertAction!) in self.setNextPuzzle()})
-            alertController.addAction(alertAction)
-            self.present(alertController, animated: true)
+            self.presentResult(title: "Incorrect!")
         }
+    }
+    
+    private func presentResult(title: String) {
+        let alertController = UIAlertController(title: title, message: "\(self.currentPuzzle.answer) is the correct answer", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Next", style: .default, handler: { alert in self.setNextPuzzle() })
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true)
     }
     
     private func setNextPuzzle() {
@@ -61,16 +62,16 @@ class PuzzleViewController: UIViewController {
         if self.currentPuzzleIndex < self.puzzles.count {
             self.currentPuzzle = self.puzzles[self.currentPuzzleIndex]
         } else {
-            self.gameOver()
+            self.endGame()
         }
     }
     
     private func updateViewForNewPuzzle() {
-        self.emojiLabel?.text = self.currentPuzzle.description
-        self.answerLabel?.text = ""
+        self.emojiLabel.text = self.currentPuzzle.question
+        self.answerTextField.text = ""
     }
     
-    private func gameOver() {
+    private func endGame() {
         performSegue(withIdentifier: "gameOverSegue", sender: nil)
         
         // reset game

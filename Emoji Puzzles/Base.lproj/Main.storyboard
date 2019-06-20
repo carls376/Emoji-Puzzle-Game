@@ -46,7 +46,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="answerLabel" destination="YYf-5K-Z1B" id="0c8-WT-DGh"/>
+                        <outlet property="answerTextField" destination="YYf-5K-Z1B" id="JTC-IM-kaA"/>
                         <outlet property="emojiLabel" destination="zhf-tY-7n6" id="tav-PG-Gtd"/>
                         <outlet property="submitButton" destination="ZfW-pD-drb" id="fQR-G9-JGl"/>
                         <segue destination="E6I-Yw-LDL" kind="show" identifier="gameOverSegue" id="MlM-8f-Atq"/>

@@ -11,8 +11,8 @@ import Foundation
 class PuzzleDataRepository : PuzzleRepository {
     
     fileprivate var puzzles : [Puzzle] = [
-        Puzzle.init(description: "test", answer: "test"),
-        Puzzle.init(description: "another test", answer: "test")
+        Puzzle.init(question: "🌎🐵🙈🙉🙊🐒", answer: "Planet of the Apes"),
+        Puzzle.init(question: "👰💁‍♀️🙅‍♀️🤦‍♀️🤷‍♀️", answer: "Bridesmaids")
     ]
     
     func getPuzzles() -> [Puzzle] {
