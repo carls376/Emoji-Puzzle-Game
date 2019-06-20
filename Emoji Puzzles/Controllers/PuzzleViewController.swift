@@ -14,20 +14,19 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
+    var puzzleRepo : PuzzleRepository = PuzzleDataRepository()
+    
     var correctAnswers: Int = 0
-    var puzzles: [Puzzle]!
-    var currentPuzzleIndex: Int = 0
-    var currentPuzzle: Puzzle! {
+    var curPuzzle: Puzzle! {
         didSet {
             self.updateViewForNewPuzzle()
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.puzzles = PuzzleDataRepository().getPuzzles()
-        self.currentPuzzle = self.puzzles[self.currentPuzzleIndex]
+        self.setNextPuzzle()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -39,45 +38,39 @@ class PuzzleViewController: UIViewController {
     }
     
     @IBAction func submitAnswer(_ sender: Any) {
-        if self.answerTextField.text?.lowercased() == self.currentPuzzle?.answer.lowercased() {
-            // correct answer
+        if self.puzzleRepo.answerIsCorrect(answer: self.answerTextField.text ?? "") {
             self.correctAnswers += 1
             self.presentResult(title: "Correct!")
         } else {
-            // incorrect answer
             self.presentResult(title: "Incorrect!")
         }
     }
     
     private func presentResult(title: String) {
-        let alertController = UIAlertController(title: title, message: "\(self.currentPuzzle.answer) is the correct answer", preferredStyle: .alert)
+        let alertController = UIAlertController(title: title, message: "\(self.curPuzzle.answer) is the correct answer", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Next", style: .default, handler: { alert in self.setNextPuzzle() })
         alertController.addAction(alertAction)
         self.present(alertController, animated: true)
     }
     
-    private func setNextPuzzle() {
-        self.currentPuzzleIndex += 1
-        
-        if self.currentPuzzleIndex < self.puzzles.count {
-            self.currentPuzzle = self.puzzles[self.currentPuzzleIndex]
-        } else {
-            self.endGame()
-        }
+    private func updateViewForNewPuzzle() {
+        self.emojiLabel.text = self.curPuzzle?.question
+        self.answerTextField.text = ""
     }
     
-    private func updateViewForNewPuzzle() {
-        self.emojiLabel.text = self.currentPuzzle.question
-        self.answerTextField.text = ""
+    private func setNextPuzzle() {
+        guard let nextPuzzle = self.puzzleRepo.getNextPuzzle() else {
+            self.endGame()
+            return
+        }
+        self.curPuzzle = nextPuzzle
     }
     
     private func endGame() {
         performSegue(withIdentifier: "gameOverSegue", sender: nil)
         
-        // reset game
+        // reset
         self.correctAnswers = 0
-        self.currentPuzzleIndex = 0
-        self.currentPuzzle = self.puzzles[self.currentPuzzleIndex]
     }
     
 }

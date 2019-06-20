@@ -17,7 +17,8 @@ class GameOverViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.resultsLabel.text = "Game Over. You got \(self.correctAnswers) answers correct"
+        let answerText = self.correctAnswers == 1 ? "answer" : "answers"
+        self.resultsLabel.text = "Game Over. You got \(self.correctAnswers) \(answerText) correct"
     }
     
     @IBAction func startOver(_ sender: Any) {

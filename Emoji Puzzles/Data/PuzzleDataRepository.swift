@@ -15,7 +15,33 @@ class PuzzleDataRepository : PuzzleRepository {
         Puzzle.init(question: "👰💁‍♀️🙅‍♀️🤦‍♀️🤷‍♀️", answer: "Bridesmaids")
     ]
     
-    func getPuzzles() -> [Puzzle] {
-        return puzzles
+    var curPuzzleIndex: Int = -1
+    
+    func getNextPuzzle() -> Puzzle! {
+        self.curPuzzleIndex += 1
+        if self.curPuzzleIndex >= self.puzzles.count {
+            self.curPuzzleIndex = -1 // reset
+            return nil
+        }
+        
+        return self.puzzles[self.curPuzzleIndex]
+    }
+    
+    func answerIsCorrect(answer: String) -> Bool {
+        if let curPuzzle = self.getCurPuzzle() {
+            if (answer.lowercased() == curPuzzle.answer.lowercased()) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    private func getCurPuzzle() -> Puzzle! {
+        if self.curPuzzleIndex >= self.puzzles.count {
+            return nil
+        }
+        
+        return self.puzzles[self.curPuzzleIndex]
     }
 }

@@ -9,5 +9,7 @@
 import Foundation
 
 protocol PuzzleRepository {
-    func getPuzzles() -> [Puzzle]
+    var curPuzzleIndex: Int { get set }
+    func getNextPuzzle() -> Puzzle!
+    func answerIsCorrect(answer : String) -> Bool
 }
