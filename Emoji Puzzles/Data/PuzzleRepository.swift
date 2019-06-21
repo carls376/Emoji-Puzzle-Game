@@ -10,6 +10,6 @@ import Foundation
 
 protocol PuzzleRepository {
     var curPuzzleIndex: Int { get set }
-    func getNextPuzzle() -> Puzzle!
-    func answerIsCorrect(answer : String) -> Bool
+    func getNextPuzzle() -> Puzzle?
+    func isCorrectAnswer(_ answer : String) -> Bool
 }

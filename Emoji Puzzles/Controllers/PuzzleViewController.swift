@@ -14,13 +14,19 @@ class PuzzleViewController: UIViewController {
     @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
-    var puzzleRepo : PuzzleRepository = PuzzleDataRepository()
+    let puzzleRepo : PuzzleRepository = PuzzleDataRepository()
     
     var correctAnswers: Int = 0
     var curPuzzle: Puzzle! {
         didSet {
             self.updateViewForNewPuzzle()
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.answerTextField.addTarget(self, action: #selector(answerTextFieldDidChange), for: .editingChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +44,7 @@ class PuzzleViewController: UIViewController {
     }
     
     @IBAction func submitAnswer(_ sender: Any) {
-        if self.puzzleRepo.answerIsCorrect(answer: self.answerTextField.text ?? "") {
+        if self.puzzleRepo.isCorrectAnswer(self.answerTextField.text!) {
             self.correctAnswers += 1
             self.presentResult(title: "Correct!")
         } else {
@@ -56,6 +62,16 @@ class PuzzleViewController: UIViewController {
     private func updateViewForNewPuzzle() {
         self.emojiLabel.text = self.curPuzzle?.question
         self.answerTextField.text = ""
+        self.submitButton.isEnabled = false
+    }
+    
+    @objc private func answerTextFieldDidChange() {
+        guard let text = self.answerTextField.text, !text.isEmpty else {
+            self.submitButton.isEnabled = false
+            return
+        }
+        
+        self.submitButton.isEnabled = true
     }
     
     private func setNextPuzzle() {

@@ -17,9 +17,9 @@ class PuzzleDataRepository : PuzzleRepository {
     
     var curPuzzleIndex: Int = -1
     
-    func getNextPuzzle() -> Puzzle! {
+    func getNextPuzzle() -> Puzzle? {
         self.curPuzzleIndex += 1
-        if self.curPuzzleIndex >= self.puzzles.count {
+        guard self.curPuzzleIndex < self.puzzles.count else {
             self.curPuzzleIndex = -1 // reset
             return nil
         }
@@ -27,18 +27,16 @@ class PuzzleDataRepository : PuzzleRepository {
         return self.puzzles[self.curPuzzleIndex]
     }
     
-    func answerIsCorrect(answer: String) -> Bool {
-        if let curPuzzle = self.getCurPuzzle() {
-            if (answer.lowercased() == curPuzzle.answer.lowercased()) {
-                return true
-            }
+    func isCorrectAnswer(_ answer: String) -> Bool {
+        if let curPuzzle = self.getCurPuzzle(), answer.lowercased() == curPuzzle.answer.lowercased() {
+            return true
         }
         
         return false
     }
     
-    private func getCurPuzzle() -> Puzzle! {
-        if self.curPuzzleIndex >= self.puzzles.count {
+    private func getCurPuzzle() -> Puzzle? {
+        guard self.curPuzzleIndex < self.puzzles.count else {
             return nil
         }
         
