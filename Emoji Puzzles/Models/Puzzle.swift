@@ -9,11 +9,11 @@
 import Foundation
 
 struct Puzzle {
-    var description: String
-    var answer: String
+    let question: String
+    let answer: String
     
-    init(description: String, answer: String) {
-        self.description = description
+    init(question: String, answer: String) {
+        self.question = question
         self.answer = answer
     }
 }
